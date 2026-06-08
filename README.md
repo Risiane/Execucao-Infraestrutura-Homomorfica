@@ -1,6 +1,4 @@
-# Instruções de Execução
-
-# Infraestrutura de Criptografia Homomórfica
+# Instruções de Execução: Infraestrutura de Criptografia Homomórfica
 
 Este projeto implementa uma prova de conceito de criptografia homomórfica em um ambiente de nuvem simulado. A arquitetura utiliza containers Docker, LocalStack para simular o serviço S3, um cliente responsável pela criptografia e descriptografia, e um servidor responsável por processar dados criptografados sem acessar os valores em texto claro.
 
