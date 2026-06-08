@@ -1,0 +1,45 @@
+services:
+  localstack:
+    image: localstack/localstack:3.8.1
+    container_name: he-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - AWS_DEFAULT_REGION=us-east-1
+      - PERSISTENCE=0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  client:
+    build: .
+    container_name: he-client
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - LOCALSTACK_ENDPOINT=http://localstack:4566
+      - BUCKET_NAME=he-bucket
+    depends_on:
+      - localstack
+    command: tail -f /dev/null
+
+  server:
+    build: .
+    container_name: he-server
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - LOCALSTACK_ENDPOINT=http://localstack:4566
+      - BUCKET_NAME=he-bucket
+    depends_on:
+      - localstack
+    command: tail -f /dev/null

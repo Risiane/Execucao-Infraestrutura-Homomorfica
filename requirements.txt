@@ -1,0 +1,8 @@
+# Biblioteca para criptografia homomórfica em Python
+tenseal==0.3.16
+
+# Dependência necessária para o funcionamento interno do TenSEAL
+numpy==1.26.4
+
+# Biblioteca oficial da AWS para Python, usada para comunicação com o S3 do LocalStack
+boto3==1.34.162
